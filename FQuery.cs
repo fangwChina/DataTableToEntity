@@ -8,6 +8,7 @@ using System.Data;
 using Microsoft.CSharp;
 namespace FQuery
 {
+    
     /// <summary>
     /// 对DataTable的补充方法
     /// </summary>
