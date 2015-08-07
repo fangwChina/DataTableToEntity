@@ -8,7 +8,6 @@ using System.Data;
 using Microsoft.CSharp;
 namespace FQuery
 {
-    
     /// <summary>
     /// 对DataTable的补充方法
     /// </summary>
@@ -38,7 +37,9 @@ namespace FQuery
            StringBuilder sb = new StringBuilder();
            string className = typeof(T).Name;
            fNameSpace = typeof(T).Namespace;
-           sb.Append("using System.Collections.Generic;\n");
+           sb.Append(@" using System;
+                        using System.Collections.Generic;
+                        using System.Text;");
            sb.Append(string.Format("namespace {0}\n",fNameSpace));
            sb.Append(" {\n");
            sb.Append(string.Format("public   class {0}", className + basic_Entity));
@@ -96,83 +97,83 @@ namespace FQuery
            }
            else if (memberType == typeof(Int16))
            {
-                result = "int.Parse(value.ToString())";
+                result = "int.Parse("+value+".ToString())";
            }
            else if (memberType == typeof(Int16?))
            {
-               result = "value==null?null:int.Parse(value.ToString())";
+               result = "" + value + "==null?null:int.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(Int32))
            {
-                result = "int.Parse(value.ToString())";
+               result = "int.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(Int32?))
            {
-               result = "value==null?null:int.Parse(value.ToString())";
+               result = "" + value + "==null?null:int.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(Int64))
            {
-               result = "int.Parse(value.ToString())";
+               result = "int.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(Int64?))
            {
-                result = "value==null?null:int.Parse(value.ToString())";
+               result = "" + value + "==null?null:int.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(byte))
            {
-               result = "byte.Parse(value.ToString())";
+               result = "byte.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(byte?))
            {
-               result = "value==null?null:byte.Parse(value.ToString())";
+               result = "" + value + "==null?null:byte.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(char))
            {
-               result = "char.Parse(value.ToString())";
+               result = "char.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(char?))
            {
-               result = "value==null?null:char.Parse(value.ToString())";
+               result = "" + value + "==null?null:char.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(DateTime))
            {
-               result = "DateTime.Parse(value.ToString())";
+               result = "DateTime.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(DateTime?))
            {
-               result = "value==null?null:DateTime.Parse(value.ToString())";
+               result = "" + value + "==null?null:DateTime.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(decimal))
            {
-               result = "decimal.Parse(value.ToString())";
+               result = "decimal.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(decimal?))
            {
-               result = "value==null?null:decimal.Parse(value.ToString())";
+               result = "" + value + "==null?null:decimal.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(double))
            {
-               result = "double.Parse(value.ToString())";
+               result = "double.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(double?))
            {
-               result = "value==null?null:double.Parse(value.ToString())";
+               result = "" + value + "==null?null:double.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(float))
            {
-               result = "float.Parse(value.ToString())";
+               result = "float.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(float?))
            {
-               result = "value==null?null:float.Parse(value.ToString())";
+               result = "" + value + "==null?null:float.Parse(" + value + ".ToString())";
            }
            else if (memberType == typeof(Guid))
            {
-               result = "new Guid(value.ToString())";
+               result = "new Guid(" + value + ".ToString())";
            }
            else if (memberType == typeof(Guid?))
            {
-               result = "value==null?null:new Guid(value.ToString())";
+               result = "" + value + "==null?null:new Guid(" + value + ".ToString())";
            }
            return result;
        }
@@ -188,11 +189,11 @@ namespace FQuery
            paras.GenerateInMemory = true;
            //paras.ReferencedAssemblies.Add("System.Xml.dll");
            //paras.ReferencedAssemblies.Add("System.Data.dll");
-           foreach (var item in typeof(T).Assembly.GetReferencedAssemblies())
-           {
-               if (item.Name != "System.Core")
-                   paras.ReferencedAssemblies.Add(item.Name + ".dll");
-           }
+           //foreach (var item in typeof(T).Assembly.GetReferencedAssemblies())
+           //{
+           //    if (item.Name != "System.Core")
+           //        paras.ReferencedAssemblies.Add(item.Name + ".dll");
+           //}
            paras.ReferencedAssemblies.Add("System.dll");
            paras.ReferencedAssemblies.Add("System.Data.dll");
            paras.ReferencedAssemblies.Add("mscorlib.dll");
